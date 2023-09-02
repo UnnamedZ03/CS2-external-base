@@ -1,7 +1,6 @@
 # CS2-external-base
 ## A simple CS2 base made by me. Pay attention to the reasoning and not to the way I draw, nor to the messy structure of the code.
 ### UC link : NONE
-#### The memory and driver parts have been removed because I don't want to publicize my writing and reading methods. Consequently, you'll have to implement your own.
 #### Features :
 
 - [x] Team Check
@@ -9,6 +8,8 @@
 - [x] ESP Health
 - [x] ESP Distance
 - [x] ESP Text Health
+
+(The memory and driver parts have been removed because I don't want to publicize my writing and reading methods. Consequently, you'll have to implement your own.)
 
 **Thanks to :**
 
