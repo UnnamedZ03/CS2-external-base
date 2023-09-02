@@ -9,7 +9,7 @@
 - [x] ESP Distance
 - [x] ESP Text Health
 
-(The memory and driver parts have been removed because I don't want to publicize my writing and reading methods. Consequently, you'll have to implement your own.)
+(The memory and driver parts have been removed because I don't want to publicize my writing and reading methods. Consequently, you'll have to implement your own. NVIDIA Overlay is required)
 
 **Thanks to :**
 
