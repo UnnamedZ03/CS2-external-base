@@ -14,7 +14,6 @@
 **Thanks to :**
 
 - **IRAIZO : https://github.com/iraizo/nvidia-overlay-hijack (For the overlay)**
-- **Zangous mapped**
 
 ![alt text](https://github.com/UnnamedZ03/CS2-external-base/blob/main/image.jpg)
 
