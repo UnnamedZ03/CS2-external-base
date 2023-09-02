@@ -6,7 +6,7 @@
 
 void ESPLoop() {
 
-    hwnd = FindWindowA(NULL, "Counter-Strike 2"); // Target Window With his lpClassName ( UnrealWindow )
+    hwnd = FindWindowA(NULL, "Counter-Strike 2"); // Target Window With his lpClassName
     OverlayWindow = FindWindow("CEF-OSC-WIDGET", "NVIDIA GeForce Overlay");
     hwnd_active = GetForegroundWindow();
 
