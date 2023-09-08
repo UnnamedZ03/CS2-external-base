@@ -7,6 +7,7 @@
 - [x] ESP box
 - [x] ESP Health
 - [x] ESP Distance
+- [x] ESP Skeleton
 - [x] ESP Text Health
 
 (The memory and driver parts have been removed because I don't want to publicize my writing and reading methods. Consequently, you'll have to implement your own. NVIDIA Overlay is required)
