@@ -1,9 +1,9 @@
 #pragma once
 
 /* @NOTE: I retrieved this with a little reversing, nothing complicated and I regularly post new ones. */
-constexpr DWORD64 s_dwEntityList_Offset = 0x1679C38;
-constexpr DWORD64 viewmatrix_Offset = 0x1713CF0;
-constexpr DWORD64 localplayer_Offset = 0x1713348;
+constexpr DWORD64 s_dwEntityList_Offset = 0x167AC38;
+constexpr DWORD64 viewmatrix_Offset = 0x1714d00;
+constexpr DWORD64 localplayer_Offset = 0x1714358;
 
 /* @NOTE: You can obtain such offsets by using source2gen */
 constexpr DWORD64 s_dwPawnIsAlive_Offset = 0x804;
@@ -12,7 +12,10 @@ constexpr DWORD64 s_dwPlayerPawn_Offset = 0x5dc;
 constexpr DWORD64 s_dwSanitizedName_Offset = 0x720;
 constexpr DWORD64 s_Position_Offset = 0x12AC;
 constexpr DWORD64 s_teamnum_Offset = 0x3bf;
-constexpr DWORD64 s_bIsLocalPlayerController_Offset = 0x6A0;
+constexpr DWORD64 s_bIsLocalPlayerController_Offset = 0x6A0; //
+constexpr DWORD64 cs2_gameSceneMode = 0x310; //C_BaseEntity.m_pGameSceneNode //
+constexpr DWORD64 cs2_modelState = 0x160;  //CSkeletonInstance : CGameSceneNode -> m_modelState // 
+constexpr DWORD64 cs2_boneArray = 0x80; //CModelState.m_boneArray // 
 
 inline DWORD64 g_dwEntList = 0;
 inline DWORD64 client = 0;
