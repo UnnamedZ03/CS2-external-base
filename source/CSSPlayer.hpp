@@ -1,9 +1,9 @@
 #pragma once
 
 /* @NOTE: I retrieved this with a little reversing, nothing complicated and I regularly post new ones. */
-constexpr DWORD64 s_dwEntityList_Offset = 0x167AC38;
-constexpr DWORD64 viewmatrix_Offset = 0x1714d00;
-constexpr DWORD64 localplayer_Offset = 0x1714358;
+constexpr DWORD64 s_dwEntityList_Offset = 0x167BCC8;
+constexpr DWORD64 viewmatrix_Offset = 0x1715D90;
+constexpr DWORD64 localplayer_Offset = 0x17153E8;
 
 /* @NOTE: You can obtain such offsets by using source2gen */
 constexpr DWORD64 s_dwPawnIsAlive_Offset = 0x804;
