@@ -74,13 +74,14 @@ namespace esp
 
     inline bool distance = true;
 
+    inline bool skeleton = true;
+
     inline bool team = true;
 
     inline bool crosshair = true;
 
     inline bool FPS = true;
 }
-
 void DrawFilledRectangle(int x, int y, int w, int h, D2D1::ColorF color)
 {
     D2D1_RECT_F rect = { x, y, x + w, y + h };
