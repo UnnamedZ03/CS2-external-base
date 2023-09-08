@@ -235,6 +235,11 @@ void RenderMenu()
             g_overlay->draw_text(5, 100, D2D1::ColorF(0, 255, 0, 255), "F6 Health Text : ON");
         else
             g_overlay->draw_text(5, 100, D2D1::ColorF(255, 0, 0, 255), "F6 Health Text : OFF");
+
+        if (esp::skeleton)
+            g_overlay->draw_text(5, 120, D2D1::ColorF(0, 255, 0, 255), "F7 Skeleton : ON");
+        else
+            g_overlay->draw_text(5, 120, D2D1::ColorF(255, 0, 0, 255), "F7 Skeleton : OFF");
     }
 }
 
@@ -262,6 +267,11 @@ void Update() {
             if (GetAsyncKeyState(VK_F6) & 1)
                 if (showmenu)
                     esp::healthT = !esp::healthT;
+
+            if (GetAsyncKeyState(VK_F7) & 1)
+                if (showmenu)
+                    esp::skeleton = !esp::skeleton;
+
         }
         if (GetAsyncKeyState(VK_INSERT) & 1)
             showmenu = !showmenu;
