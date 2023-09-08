@@ -4,7 +4,7 @@
 
 void ESPLoop() {
 
-    hwnd = FindWindowA(NULL, "Counter-Strike 2"); // Target Window With his lpClassName
+    hwnd = FindWindowA(NULL, "Counter-Strike 2"); // Target Window With his lpClassName ( UnrealWindow )
     OverlayWindow = FindWindow("CEF-OSC-WIDGET", "NVIDIA GeForce Overlay");
     hwnd_active = GetForegroundWindow();
 
@@ -19,8 +19,10 @@ void ESPLoop() {
 
     if (esp::crosshair)
     {
-        g_overlay->draw_line(ScreenCenterX - 15, ScreenCenterY - 15, ScreenCenterX + 15, ScreenCenterY + 15, CrosshairColor);
-        g_overlay->draw_line(ScreenCenterX - 15, ScreenCenterY + 15, ScreenCenterX + 15, ScreenCenterY - 15, CrosshairColor);
+        g_overlay->draw_line(ScreenCenterX, ScreenCenterY - 5, ScreenCenterX, ScreenCenterY + 5, CrosshairColor);
+        g_overlay->draw_line(ScreenCenterX - 5, ScreenCenterY, ScreenCenterX + 5, ScreenCenterY, CrosshairColor);
+        g_overlay->draw_line(ScreenCenterX, ScreenCenterY - 5, ScreenCenterX, ScreenCenterY + 5, CrosshairColor);
+        g_overlay->draw_line(ScreenCenterX - 5, ScreenCenterY, ScreenCenterX + 5, ScreenCenterY, CrosshairColor);
     }
 
     ImVec2 size = ImVec2(ScreenCenterX * 2, ScreenCenterY * 2);
@@ -59,10 +61,14 @@ void ESPLoop() {
         if (pPlayerController->Teamnum() == localteam) 
             continue;
 
+        uint64_t pawn = (uint64_t)pPlayerController->m_hPlayerPawn();
+        uint64_t gamescene = driver::read<uint64_t>(pawn + cs2_gameSceneMode);
+        uint64_t bonearray = driver::read<uint64_t>(gamescene + cs2_modelState + cs2_boneArray);
+
         vec3 playerpos = pPlayerController->pos(pPlayerController->m_hPlayerPawn());
         vec3 pos;
 
-        vec3 head_pos = vec3(playerpos.x, playerpos.y, playerpos.z + 63);
+        vec3 head_pos = driver::read<vec3>(bonearray + 6 * 32);
         vec3 head;
 
         if (!world_to_screen(screensize, playerpos, pos, viewmatrix))
@@ -71,6 +77,82 @@ void ESPLoop() {
         if (!world_to_screen(screensize, head_pos, head, viewmatrix))
             continue;
 
+        int distance = static_cast<int>(localpos.distance_to(playerpos) / 100);
+
+        if (esp::skeleton)
+        {
+
+            vec3 head = driver::read<vec3>(bonearray + 6 * 32);
+            vec3 cou = driver::read<vec3>(bonearray + 5 * 32);
+            vec3 shoulderR = driver::read<vec3>(bonearray + 8 * 32);
+            vec3 shoulderL = driver::read<vec3>(bonearray + 13 * 32);
+            vec3 brasR = driver::read<vec3>(bonearray + 9 * 32);
+            vec3 brasL = driver::read<vec3>(bonearray + 14 * 32);
+            vec3 handR = driver::read<vec3>(bonearray + 11 * 32);
+            vec3 handL = driver::read<vec3>(bonearray + 16 * 32);
+            vec3 cock = driver::read<vec3>(bonearray + 0 * 32);
+            vec3 kneesR = driver::read<vec3>(bonearray + 23 * 32);
+            vec3 kneesL = driver::read<vec3>(bonearray + 26 * 32);
+            vec3 feetR = driver::read<vec3>(bonearray + 24 * 32);
+            vec3 feetL = driver::read<vec3>(bonearray + 27 * 32);
+
+            vec3 Ahead;
+            vec3 Acou;
+            vec3 AshoulderR;
+            vec3 AshoulderL;
+            vec3 AbrasR;
+            vec3 AbrasL;
+            vec3 AhandR;
+            vec3 AhandL;
+            vec3 Acock;
+            vec3 AkneesR;
+            vec3 AkneesL;
+            vec3 AfeetR;
+            vec3 AfeetL;
+
+            if (!world_to_screen(screensize, head, Ahead, viewmatrix))
+                continue;
+            if (!world_to_screen(screensize, cou, Acou, viewmatrix))
+                continue;
+            if (!world_to_screen(screensize, shoulderR, AshoulderR, viewmatrix))
+                continue;
+            if (!world_to_screen(screensize, shoulderL, AshoulderL, viewmatrix))
+                continue;
+            if (!world_to_screen(screensize, brasR, AbrasR, viewmatrix))
+                continue;
+            if (!world_to_screen(screensize, brasL, AbrasL, viewmatrix))
+                continue;
+            if (!world_to_screen(screensize, handL, AhandL, viewmatrix))
+                continue;
+            if (!world_to_screen(screensize, handR, AhandR, viewmatrix))
+                continue;
+            if (!world_to_screen(screensize, cock, Acock, viewmatrix))
+                continue;
+            if (!world_to_screen(screensize, kneesR, AkneesR, viewmatrix))
+                continue;
+            if (!world_to_screen(screensize, kneesL, AkneesL, viewmatrix))
+                continue;
+            if (!world_to_screen(screensize, feetR, AfeetR, viewmatrix))
+                continue;
+            if (!world_to_screen(screensize, feetL, AfeetL, viewmatrix))
+                continue;
+
+            g_overlay->draw_line(Acou.x, Acou.y, Ahead.x, Ahead.y, D2D1::ColorF(255, 255, 255, 255));
+            g_overlay->draw_line(Acou.x,Acou.y,AshoulderR.x, AshoulderR.y, D2D1::ColorF(255, 255, 255, 255));
+            g_overlay->draw_line(Acou.x,Acou.y,AshoulderL.x, AshoulderL.y, D2D1::ColorF(255, 255, 255, 255));
+            g_overlay->draw_line(AbrasL.x,AbrasL.y,AshoulderL.x, AshoulderL.y, D2D1::ColorF(255, 255, 255, 255));
+            g_overlay->draw_line(AbrasR.x,AbrasR.y,AshoulderR.x, AshoulderR.y, D2D1::ColorF(255, 255, 255, 255));
+            g_overlay->draw_line(AbrasR.x,AbrasR.y,AhandR.x, AhandR.y, D2D1::ColorF(255, 255, 255, 255));
+            g_overlay->draw_line(AbrasL.x,AbrasL.y,AhandL.x, AhandL.y, D2D1::ColorF(255, 255, 255, 255));
+            g_overlay->draw_line(Acou.x,Acou.y,Acock.x, Acock.y, D2D1::ColorF(255, 255, 255, 255));
+            g_overlay->draw_line(AkneesR.x,AkneesR.y,Acock.x, Acock.y, D2D1::ColorF(255, 255, 255, 255));
+            g_overlay->draw_line(AkneesL.x,AkneesL.y,Acock.x, Acock.y, D2D1::ColorF(255, 255, 255, 255));
+            g_overlay->draw_line(AkneesL.x,AkneesL.y,AfeetL.x,AfeetL.y, D2D1::ColorF(255, 255, 255, 255));
+            g_overlay->draw_line(AkneesR.x,AkneesR.y,AfeetR.x,AfeetR.y, D2D1::ColorF(255, 255, 255, 255));
+
+        }
+
+
         /* @NOTE : don't judge all these calculations, I did it very quickly, get inspired by the reasoning but especially not by my way of drawing... sorry lol*/
         float top = head.y;
         float bottom = pos.y;
@@ -78,7 +160,6 @@ void ESPLoop() {
         float left = pos.x - width / 2.f - 1.5f;
         float right = pos.x + width / 2.f + 1.5f;
         float height = abs(abs(pos.y) - abs(pos.y));
-        int distance = static_cast<int>(localpos.distance_to(playerpos) / 100);
         auto extend = +5;
 
         if (esp::health)
