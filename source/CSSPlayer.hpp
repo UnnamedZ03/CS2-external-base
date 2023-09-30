@@ -120,7 +120,7 @@ public:
 
     vec3 pos(C_CSPlayerPawn* pawn)
     {
-        return driver::read<vec3>((DWORD64)pawn + 0x12AC);
+        return driver::read<vec3>((DWORD64)pawn + s_Position_Offset);
     }
 
 
