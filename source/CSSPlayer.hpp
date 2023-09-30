@@ -98,7 +98,7 @@ public:
         std::string sBuffer = { };
         sBuffer.resize(32);
 
-        DWORD64 SanitizedPlayerName = driver::read<DWORD64>(((DWORD64)(this) + 0x720));
+        DWORD64 SanitizedPlayerName = driver::read<DWORD64>(((DWORD64)(this) + s_dwSanitizedName_Offset));
         if (!SanitizedPlayerName)
             return { };
 
